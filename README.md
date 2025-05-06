@@ -64,10 +64,10 @@ flowchart TD
     Daemon["Daemon (FastAPI) :8000"]
     Robot["Robot API (mock or real) :9000"]
 
-    User   -->|POST /command|           Daemon
-    Daemon -->|forward command|         Robot
-    Daemon -->|GET /robot/state (30 s)| Robot
-    Daemon -->|cached state|            User
+    User -->|POST /command| Daemon
+    Daemon -->|forward command| Robot
+    Daemon -->|GET /robot/state| Robot
+    Daemon -->|cached state| User
 ```
 
 ## 4. Solution 
