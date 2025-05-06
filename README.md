@@ -1,4 +1,4 @@
-# Robot-Daemon README
+# Robot-Daemon 
 
 This is a simple Python daemon built as part of the programming task. It’s designed to forward commands from HTTP to a local robot and periodically check the robot’s status. It’s straightforward and self-contained.
 
@@ -59,15 +59,15 @@ This proves commands flow from your client → daemon → robot (mock), and stat
 ## 3. What's Going On 
 
 ```mermaid
-graph TD
-    User[User (curl / Postman / browser)]
-    Daemon[Daemon (FastAPI) :8000]
-    Robot[Robot API (mock or real)]
+flowchart TD
+    User["Client (curl, Postman, browser)"]
+    Daemon["Daemon (FastAPI) :8000"]
+    Robot["Robot API (mock or real) :9000"]
 
-    User   -->|POST /command|            Daemon
-    Daemon -->|Forward command|          Robot
-    Daemon -->|GET /robot/state (30 s)|  Robot
-    Daemon -->|Cached state|             User
+    User   -->|POST /command|             Daemon
+    Daemon -->|forward command|           Robot
+    Daemon -->|GET /robot/state (30 s)|   Robot
+    Daemon -->|cached state|              User
 ```
 
 ## 4. Solution 
