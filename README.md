@@ -119,3 +119,9 @@ async def status():
 The configuration is in `config.yaml`, parsed by a five‑line helper that simply wraps `yaml.safe_load`. The operators edit two URLs (command and state) or flip `mode: telnet`, restart the process, and the daemon now speaks to a different robot without touching code.
 
 It's basically just one tiny HTTP layer, one thread for polling, one module that abstracts “how to talk to a robot,” and a YAML file gluing it all together. 
+
+## Security Comments
+
+In a production setting the daemon would no longer be a single process on a single host but part of a broader service mesh, and its security posture must evolve accordingly. First, all traffic should be encrypted in transit: the daemon must listen on HTTPS with a certificate issued by the organisation’s CA, and outbound calls to the robot (or to an edge‑side proxy that fronts the robot network) should use TLS or be encapsulated in an mTLS tunnel. Authentication and authorisation must move beyond implicit localhost trust; FastAPI’s dependency system makes it trivial to enforce JWT‑ or OAuth2‑based bearer tokens on every request, and the robot URLs themselves should be reachable only through a mutually‑authenticated side‑car proxy, so that compromised daemon instances cannot address arbitrary machines.
+
+Secrets management must be delegated to a central store such as HashiCorp Vault, AWS Secrets Manager, or Kubernetes secrets; the YAML loader can be replaced with a thin wrapper that fetches credentials at start‑up and injects them into the same in‑memory structure, keeping rotation automatic and audit‑able.
