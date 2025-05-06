@@ -60,14 +60,14 @@ This proves commands flow from your client → daemon → robot (mock), and stat
 
 ```mermaid
 graph TD
-    User[User: curl/postman/browser]
+    User[User (curl / Postman / browser)]
     Daemon[Daemon (FastAPI) :8000]
-    Robot[Robot API (mock_robot or real robot)]
+    Robot[Robot API (mock or real)]
 
-    User -->|"POST /command"| Daemon
-    Daemon -->|"Forward command"| Robot
-    Daemon -->|"GET /robot/state (every 30s)"| Robot
-    Daemon -->|"Cached state"| User
+    User   -->|POST /command|            Daemon
+    Daemon -->|Forward command|          Robot
+    Daemon -->|GET /robot/state (30 s)|  Robot
+    Daemon -->|Cached state|             User
 ```
 
 ## 4. Solution 
