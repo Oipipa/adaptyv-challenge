@@ -1,0 +1,13 @@
+robot:
+  mode: rest 
+  rest:
+    url: "http://127.0.0.1:9000/robot/command"
+    state_url: "http://127.0.0.1:9000/robot/state"
+  telnet:
+    host: "127.0.0.1"
+    port: 5000
+
+daemon:
+  host: "0.0.0.0"
+  port: 8000
+  heartbeat_interval: 30
