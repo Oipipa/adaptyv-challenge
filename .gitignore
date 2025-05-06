@@ -4,3 +4,6 @@ ENV/
 env.bak/
 venv.bak/
 __pycache__/
+robotd.spec
+dist/
+build/

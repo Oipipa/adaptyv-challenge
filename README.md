@@ -4,17 +4,22 @@ This is a simple Python daemon built as part of the programming task. It’s des
 
 ## 1. How to Run
 
-The daemon doesn't need compiling. It runs from a Python virtual environment for isolation.
+The daemon is compiled using `pyinstaller`
 
 To get started:
 
 ```bash
 chmod +x install.sh
-./install.sh  # this creates a Python venv and installs everything needed
+./install.sh  # this creates a Python venv and installs everything needed. It also makes the binary at dist/robotd
+```
 
+If you want to run it directly:
+```bash
 # Run the daemon
 env/bin/python -m robot_daemon
 ```
+
+Or for a non-technical person, just give them the binary in `dist/robotd`.
 
 The daemon will start running on `http://0.0.0.0:8000`.
 
