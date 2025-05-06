@@ -68,7 +68,6 @@ flowchart TD
     Daemon -->|forward command|         Robot
     Daemon -->|GET /robot/state (30 s)| Robot
     Daemon -->|cached state|            User
-
 ```
 
 ## 4. Solution 
